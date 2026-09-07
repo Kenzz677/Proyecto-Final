@@ -1,1 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Bitácora</title>
+
+<style>
+
+*{
+    box-sizing:border-box
+}
+
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f4f4f8;
+    text-align:center;
+}
+
+header{
+    padding:40px;
+    background:#100662;
+    color:white;
+}
+
+h1{
+    margin:0;
+    text-shadow:0 0 10px #fff,0 0 20px red;
+}
+
+main{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.tabs{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px;
+}
+
+button{
+    padding:12px 20px;
+    border:0;
+    border-radius:8px;
+    background:#100662;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover,
+.active{
+    background:#7126bb;
+}
+
+.tab{
+    display:none;
+}
+
+.tab.active{
+    display:block;
+}
+
+.card{
+    background:white;
+    margin-top:20px;
+    padding:25px;
+    border-left:6px solid #7126bb;
+    border-radius:12px;
+    box-shadow:0 4px 15px #ccc;
+    text-align:left;
+}
+
+footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 50px;
+    background:#f2ff00;
+    font-weight:bold;
+}
+
+
+@media(max-width:768px){
+
+    button{
+        width:100%;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<header>
+
+<h1>Bitácora</h1>
+
+</header>
+
+
+<main>
+
+
+<div class="tabs">
+
+
+<button class="active" onclick="openTab('s1',this)">
+Pestaña 1
+</button>
+
+
+<button onclick="openTab('s2',this)">
+Pestaña 2
+</button>
+
+
+<button onclick="openTab('s3',this)">
+Pestaña 3
+</button>
+
+
+<button onclick="openTab('s4',this)">
+Pestaña 4
+</button>
+
+
+<button onclick="openTab('s5',this)">
+Pestaña 5
+</button>
+
+
+<button onclick="openTab('s6',this)">
+Pestaña 6
+</button>
+
+
+<button onclick="openTab('s7',this)">
+Pestaña 7
+</button>
+
+
+</div>
+
+
+
+<div id="s1" class="tab active">
+
+<div class="card">
+
+<h2>Pestaña 1</h2>
+
+<p>
+Agrega aquí tu contenido.
+</p>
+
+</div>
+
+</div>
+
+
+
+<div id="s2" class="tab">
+
+<div class="card">
+
+<h2>Pestaña 2</h2>
+
+<p>
+Agrega aquí tu contenido.
+</p>
+
+</div>
+
+</div>
+
+
+
+<div id="s3" class="tab">
+
+<div class="card">
+
+<h2>Pestaña 3</h2>
+
+<p>
+Agrega aquí tu contenido.
+</p>
+
+</div>
+
+</div>
+
+
+
+<div id="s4" class="tab">
+
+<div class="card">
+
+<h2>Pestaña 4</h2>
+
+<p>
+Agrega aquí tu contenido.
+</p>
+
+</div>
+
+</div>
+
+
+
+<div id="s5" class="tab">
+
+<div class="card">
+
+<h2>Pestaña 5</h2>
+
+<p>
+Agrega aquí tu contenido.
+</p>
+
+</div>
+
+</div>
+
+
+
+<div id="s6" class="tab">
+
+<div class="card">
+
+<h2>Pestaña 6</h2>
+
+<p>
+Agrega aquí tu contenido.
+</p>
+
+</div>
+
+</div>
+
+
+
+<div id="s7" class="tab">
+
+<div class="card">
+
+<h2>Pestaña 7</h2>
+
+<p>
+Agrega aquí tu contenido.
+</p>
+
+</div>
+
+</div>
+
+
+
+</main>
+
+
+
+<footer>
+
+<span>@kenzz</span>
+
+</footer>
+
+
+
+<script>
+
+function openTab(id,btn){
+
+document
+.querySelectorAll('.tab')
+.forEach(x=>x.classList.remove('active'));
+
+
+document
+.querySelectorAll('button')
+.forEach(x=>x.classList.remove('active'));
+
+
+document
+.getElementById(id)
+.classList.add('active');
+
+
+btn.classList.add('active');
+
+}
+
+</script>
+
+
+</body>
+
+</html>
