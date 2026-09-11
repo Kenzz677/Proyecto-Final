@@ -325,10 +325,9 @@
                 <div class="audio-container">
                     <h3>Escucha nuestro Podcast de Presentación</h3>
                     <audio controls>
-                        <source src="Podcast IRTRA GUARD.mp3" type="audio/mpeg">
-                        <source src="Podcast IRTRA GUARD.wav" type="audio/wav">
-                        Tu navegador no soporta el elemento de audio.
-                    </audio>
+                      <source src="IRTRA GUARD.m4a" type="audio/mp4">
+                    Tu navegador no soporta el elemento de audio.
+                  </audio>
                 </div>
             </div>
         </div>
