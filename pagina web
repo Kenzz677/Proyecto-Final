@@ -2,39 +2,426 @@
 <html lang="es">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRTRA GUARD - Bitácora del Proyecto</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* =========================
+           CONFIGURACIÓN GENERAL
+        ========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<title>Mi Bitácora</title>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top left, #7126bb 0%, transparent 35%),
+                radial-gradient(circle at bottom right, #100662 0%, transparent 40%),
+                linear-gradient(135deg, #09001f, #16004a, #25006b);
+            color: white;
+        }
 
-<style>
+        /* =========================
+           ENCABEZADO
+        ========================= */
+        header {
+            text-align: center;
+            padding: 50px 20px 30px;
+            background: rgba(0, 0, 0, 0.25);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+        }
 
-/* =========================
-   CONFIGURACIÓN GENERAL
-========================= */
+        header h1 {
+            font-size: clamp(32px, 5vw, 55px);
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow:
+                0 0 10px #fff,
+                0 0 25px #7126bb,
+                0 0 45px #7126bb;
+            margin-bottom: 10px;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+        header p {
+            font-size: 18px;
+            color: #ddd;
+        }
+
+        /* =========================
+           CONTENEDOR Y PESTAÑAS
+        ========================= */
+        main {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .tab-btn {
+            border: none;
+            padding: 12px 18px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            transition: all .3s ease;
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-3px);
+            background: #7126bb;
+            box-shadow: 0 8px 25px rgba(113, 38, 187, .5);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #7126bb, #a73cff);
+            box-shadow: 0 0 20px rgba(167, 60, 255, .6);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* =========================
+           CONTENIDO Y TARJETAS
+        ========================= */
+        .tab {
+            display: none;
+            animation: aparecer .5s ease;
+        }
+
+        .tab.active {
+            display: block;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            min-height: 350px;
+            padding: 40px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: #7126bb;
+            filter: blur(100px);
+            opacity: .35;
+            top: -80px;
+            right: -80px;
+        }
+
+        .card h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            position: relative;
+            color: #fff;
+        }
+
+        .card p, .card ul {
+            color: #ddd;
+            font-size: 16px;
+            line-height: 1.7;
+            position: relative;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .card li::before {
+            content: "•";
+            color: #a73cff;
+            font-weight: bold;
+            font-size: 20px;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .icon {
+            width: 80px;
+            height: 80px;
+            margin: 10px auto 25px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            background: linear-gradient(135deg, #7126bb, #a73cff);
+            box-shadow: 0 0 30px rgba(167, 60, 255, .6);
+        }
+
+        .video-container {
+            margin-top: 20px;
+            position: relative;
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        video {
+            width: 100%;
+            display: block;
+            border-radius: 15px;
+        }
+
+        pre {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            color: #8be9fd;
+            margin-top: 15px;
+        }
+
+        /* =========================
+           FOOTER Y RESPONSIVE
+        ========================= */
+        footer {
+            margin-top: 60px;
+            padding: 25px;
+            text-align: center;
+            background: rgba(0, 0, 0, .35);
+            border-top: 1px solid rgba(255, 255, 255, .1);
+            color: #ccc;
+        }
+
+        footer strong {
+            color: #a73cff;
+        }
+
+        @media(max-width: 768px) {
+            header { padding: 40px 15px 30px; }
+            main { width: 94%; margin: 20px auto; }
+            .tabs { display: grid; grid-template-columns: 1fr 1fr; }
+            .card { padding: 25px 20px; }
+            .card h2 { font-size: 22px; }
+        }
+
+        @media(max-width: 450px) {
+            .tabs { grid-template-columns: 1fr; }
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #09001f; }
+        ::-webkit-scrollbar-thumb { background: #7126bb; border-radius: 10px; }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>IRTRA GUARD</h1>
+        <p>Sistema Inteligente de Seguridad y Alerta | IRTRA Petapa</p>
+    </header>
+
+    <main>
+        <!-- NAVEGACIÓN DE PESTAÑAS -->
+        <div class="tabs" role="tablist">
+            <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="s1" id="btn-s1">📘 Resumen</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s2" id="btn-s2">💻 Componentes</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s3" id="btn-s3">⚡ Código C++</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s4" id="btn-s4">🔧 Funcionamiento</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s5" id="btn-s5">🚀 Impacto ODS</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s6" id="btn-s6">📡 Estado y Recursos</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s7" id="btn-s7">🤖 Equipo</button>
+        </div>
+
+        <!-- CONTENIDO DE PESTAÑAS -->
+        <div id="s1" class="tab active" role="tabpanel" aria-labelledby="btn-s1">
+            <div class="card">
+                <div class="icon">📘</div>
+                <h2>1. El Problema y la Propuesta</h2>
+                <p><strong>El Problema:</strong> En algunas atracciones del parque IRTRA Petapa, los visitantes pueden acercarse demasiado a zonas restringidas mientras las atracciones están en funcionamiento, lo cual representa un severo riesgo de accidentes.</p>
+                <br>
+                <p><strong>Objetivo de la Propuesta:</strong> Diseñar un sistema autónomo con Arduino que detecte la proximidad de personas en zonas peligrosas y active alertas visuales y sonoras inmediatas para proteger a los visitantes.</p>
+                <br>
+                <p><strong>Video de Demostración del Proyecto:</strong></p>
+                <div class="video-container">
+                    <video controls poster="">
+                        <source src="video_1.mp4" type="video/mp4">
+                        Tu navegador no soporta la reproducción de video.
+                    </video>
+                </div>
+            </div>
+        </div>
+
+        <div id="s2" class="tab" role="tabpanel" aria-labelledby="btn-s2">
+            <div class="card">
+                <div class="icon">💻</div>
+                <h2>2. Componentes Utilizados</h2>
+                <p>El circuito utiliza los siguientes módulos y componentes para la detección e indicación en tiempo real:</p>
+                <br>
+                <ul>
+                    <li><strong>Arduino Uno R3:</strong> Microcontrolador principal encargado de ejecutar la lógica del sistema.</li>
+                    <li><strong>Sensor Ultrasónico HC-SR04:</strong> Mide la distancia de los visitantes hacia el área delimitada.</li>
+                    <li><strong>LED Rojo (Peligro):</strong> Indicador de invasión de zona de riesgo.</li>
+                    <li><strong>LED Verde (Seguro):</strong> Indicador de zona libre y funcionamiento normal.</li>
+                    <li><strong>Buzzer (Zumbador):</strong> Alarma acústica suplementaria ante intrusiones.</li>
+                    <li><strong>Push Button:</strong> Botón físico para activación y reinicio manual de la alarma.</li>
+                    <li><strong>Protoboard y Resistencias (220 Ω):</strong> Placa de pruebas y protección para los diodos LED.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="s3" class="tab" role="tabpanel" aria-labelledby="btn-s3">
+            <div class="card">
+                <div class="icon">⚡</div>
+                <h2>3. Código Fuente C++</h2>
+                <p>A continuación se muestra el bloque principal de configuración de pines e inicialización del programa desarrollado en Tinkercad:</p>
+                <pre>
+#define LedVerde 8
+#define LedRojo 12
+#define FotoRe A0
+#define Button A1
+#define Buzzer 7
+
+int CantidadLuz = 400;
+bool alarmaActivada = false;
+int estadoAnteriorBoton = HIGH;
+
+void setup() {
+    pinMode(LedVerde, OUTPUT);
+    pinMode(LedRojo, OUTPUT);
+    pinMode(FotoRe, INPUT);
+    pinMode(Button, INPUT_PULLUP);
+    pinMode(Buzzer, OUTPUT);
+
+    digitalWrite(LedVerde, HIGH);
+    digitalWrite(LedRojo, LOW);
+    noTone(Buzzer);
+
+    Serial.begin(9600);
+    Serial.println("IRTRA GUARD");
 }
+                </pre>
+            </div>
+        </div>
 
-body{
+        <div id="s4" class="tab" role="tabpanel" aria-labelledby="btn-s4">
+            <div class="card">
+                <div class="icon">🔧</div>
+                <h2>4. Lógica de Funcionamiento</h2>
+                <p>El sistema monitorea constantemente la distancia calculada por el sensor ultrasónico HC-SR04:</p>
+                <br>
+                <ul>
+                    <li><strong>Zona Segura (&gt; 60 cm):</strong> Mantiene encendido el <strong>LED Verde</strong> y apaga los indicadores de alerta.</li>
+                    <li><strong>Zona Peligrosa (&le; 60 cm):</strong> Detecta la cercanía de la persona, enciende inmediatamente el <strong>LED Rojo</strong> y activa la alarma sonora continua a través del <strong>Buzzer</strong>.</li>
+                    <li><strong>Reinicio Manual:</strong> Permite restablecer el estado del sistema mediante un botón físico (*Push Button*).</li>
+                </ul>
+            </div>
+        </div>
 
-    font-family:Arial, Helvetica, sans-serif;
+        <div id="s5" class="tab" role="tabpanel" aria-labelledby="btn-s5">
+            <div class="card">
+                <div class="icon">🚀</div>
+                <h2>5. Impacto en los ODS</h2>
+                <p><strong>ODS 3: Salud y Bienestar</strong></p>
+                <br>
+                <p>El proyecto impacta de manera directa en la reducción de incidentes dentro de áreas de alto riesgo operacionales en parques de atracciones, contribuyendo a la protección física y el bienestar de las familias y colaboradores.</p>
+            </div>
+        </div>
 
-    min-height:100vh;
+        <div id="s6" class="tab" role="tabpanel" aria-labelledby="btn-s6">
+            <div class="card">
+                <div class="icon">📡</div>
+                <h2>6. Estado y Recursos</h2>
+                <p><strong>Estado del Sistema:</strong> ¡FUNCIONA! Circuito simulado y probado exitosamente dentro del entorno virtual Tinkercad Circuits.</p>
+                <br>
+                <p><strong>Archivos del Proyecto:</strong> Puedes consultar toda la investigación, esquemas de conexión y código en la carpeta del repositorio: <code>IRTRA-GUARD/Proyecto</code>.</p>
+                <br>
+                <p><strong>Conclusión:</strong> Demuestra que la automatización de bajo costo implementada con microcontroladores incrementa la seguridad operativa en áreas de recreación masiva.</p>
+            </div>
+        </div>
 
-    background:
-        radial-gradient(circle at top left, #7126bb 0%, transparent 35%),
-        radial-gradient(circle at bottom right, #100662 0%, transparent 40%),
-        linear-gradient(135deg,#09001f,#16004a,#25006b);
+        <div id="s7" class="tab" role="tabpanel" aria-labelledby="btn-s7">
+            <div class="card">
+                <div class="icon">🤖</div>
+                <h2>7. Integrantes del Equipo</h2>
+                <ul>
+                    <li><strong>Dana Gordillo:</strong> Diseño del circuito, programación C++ y pruebas del sistema.</li>
+                    <li><strong>Gabriel Castillo:</strong> Investigación, lógica de control y documentación técnica.</li>
+                    <li><strong>Augusto Mérida:</strong> Diseño de infografía, montaje en Tinkercad y presentación.</li>
+                </ul>
+            </div>
+        </div>
+    </main>
 
-    color:white;
+    <footer>
+        <p>Tecnología, Seguridad y Diversión en Armonía | Hecho por <strong>@kenzz</strong></p>
+    </footer>
 
-}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('.tab-btn');
+            const tabs = document.querySelectorAll('.tab');
 
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.getAttribute('aria-controls');
+
+                    tabs.forEach(tab => tab.classList.remove('active'));
+                    buttons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-selected', 'false');
+                    });
+
+                    document.getElementById(targetId).classList.add('active');
+                    button.classList.add('active');
+                    button.setAttribute('aria-selected', 'true');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
 
 /* =========================
    ENCABEZADO
