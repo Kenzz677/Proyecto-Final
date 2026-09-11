@@ -225,20 +225,27 @@
             background: rgba(255, 255, 255, 0.05);
         }
 
-        .video-container {
-            margin-top: 20px;
-            position: relative;
-            width: 100%;
+        /* Reproductor de Audio Estilizado */
+        .audio-container {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.35);
             border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
         }
 
-        video {
+        .audio-container h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: #a73cff;
+        }
+
+        audio {
             width: 100%;
-            display: block;
-            border-radius: 15px;
+            outline: none;
+            border-radius: 30px;
         }
 
         pre {
@@ -297,7 +304,7 @@
     <main>
         <!-- NAVEGACIÓN DE PESTAÑAS -->
         <div class="tabs" role="tablist">
-            <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="s1" id="btn-s1">📘 Introducción</button>
+            <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="s1" id="btn-s1">🎙️ Podcast & Introducción</button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s2" id="btn-s2">💻 Fundamentos</button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s3" id="btn-s3">⚡ Componentes</button>
             <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s4" id="btn-s4">🔧 Código C++</button>
@@ -309,17 +316,19 @@
         <!-- CONTENIDO DE PESTAÑAS -->
         <div id="s1" class="tab active" role="tabpanel" aria-labelledby="btn-s1">
             <div class="card">
-                <div class="icon">📘</div>
-                <h2>1. Introducción y Problema</h2>
+                <div class="icon">🎙️</div>
+                <h2>1. Podcast e Introducción al Proyecto</h2>
                 <p><strong>El Contexto:</strong> En un parque de atracciones como IRTRA Petapa, con alta afluencia constante de familias y niños, un descuido de segundos puede derivar en accidentes en zonas restringidas[cite: 1].</p>
                 <br>
                 <p><strong>Propuesta IRTRA GUARD:</strong> Sistema autónomo diseñado con Arduino para medir la distancia de proximidad y emitir alertas inmediatas (sonoras y visuales) antes de que ocurra una eventualidad[cite: 1].</p>
                 <br>
-                <div class="video-container">
-                    <video controls poster="">
-                        <source src="IRTRA GUARD.mp4" type="video/mp4">
-                        Tu navegador no soporta la reproducción de video.
-                    </video>
+                <div class="audio-container">
+                    <h3>Escucha nuestro Podcast de Presentación</h3>
+                    <audio controls>
+                        <source src="Podcast IRTRA GUARD.mp3" type="audio/mpeg">
+                        <source src="Podcast IRTRA GUARD.wav" type="audio/wav">
+                        Tu navegador no soporta el elemento de audio.
+                    </audio>
                 </div>
             </div>
         </div>
