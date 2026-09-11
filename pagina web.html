@@ -192,6 +192,39 @@
             box-shadow: 0 0 30px rgba(167, 60, 255, .6);
         }
 
+        /* Tabla estilizada Glassmorphism */
+        .table-responsive {
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 12px;
+            overflow: hidden;
+            font-size: 14px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th {
+            background: rgba(113, 38, 187, 0.5);
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
         .video-container {
             margin-top: 20px;
             position: relative;
@@ -258,34 +291,33 @@
 
     <header>
         <h1>IRTRA GUARD</h1>
-        <p>Sistema Inteligente de Seguridad y Alerta | IRTRA Petapa</p>
+        <p>Sistema Inteligente de Seguridad y Alerta | Colegio Capouilliez</p>
     </header>
 
     <main>
         <!-- NAVEGACIÓN DE PESTAÑAS -->
         <div class="tabs" role="tablist">
-            <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="s1" id="btn-s1">📘 Resumen</button>
-            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s2" id="btn-s2">💻 Componentes</button>
-            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s3" id="btn-s3">⚡ Código C++</button>
-            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s4" id="btn-s4">🔧 Funcionamiento</button>
-            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s5" id="btn-s5">🚀 Impacto ODS</button>
-            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s6" id="btn-s6">📡 Estado y Recursos</button>
-            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s7" id="btn-s7">🤖 Equipo</button>
+            <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="s1" id="btn-s1">📘 Introducción</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s2" id="btn-s2">💻 Fundamentos</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s3" id="btn-s3">⚡ Componentes</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s4" id="btn-s4">🔧 Código C++</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s5" id="btn-s5">🚀 Marco Teórico & ODS</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s6" id="btn-s6">📡 Conclusiones</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s7" id="btn-s7">🤖 Equipo & Citas</button>
         </div>
 
         <!-- CONTENIDO DE PESTAÑAS -->
         <div id="s1" class="tab active" role="tabpanel" aria-labelledby="btn-s1">
             <div class="card">
                 <div class="icon">📘</div>
-                <h2>1. El Problema y la Propuesta</h2>
-                <p><strong>El Problema:</strong> En algunas atracciones del parque IRTRA Petapa, los visitantes pueden acercarse demasiado a zonas restringidas mientras las atracciones están en funcionamiento, lo cual representa un severo riesgo de accidentes.</p>
+                <h2>1. Introducción y Problema</h2>
+                <p><strong>El Contexto:</strong> En un parque de atracciones como IRTRA Petapa, con alta afluencia constante de familias y niños, un descuido de segundos puede derivar en accidentes en zonas restringidas[cite: 1].</p>
                 <br>
-                <p><strong>Objetivo de la Propuesta:</strong> Diseñar un sistema autónomo con Arduino que detecte la proximidad de personas en zonas peligrosas y active alertas visuales y sonoras inmediatas para proteger a los visitantes.</p>
+                <p><strong>Propuesta IRTRA GUARD:</strong> Sistema autónomo diseñado con Arduino para medir la distancia de proximidad y emitir alertas inmediatas (sonoras y visuales) antes de que ocurra una eventualidad[cite: 1].</p>
                 <br>
-                <p><strong>Video de Demostración del Proyecto:</strong></p>
                 <div class="video-container">
                     <video controls poster="">
-                        <source src="video_1.mp4" type="video/mp4">
+                        <source src="IRTRA GUARD.mp4" type="video/mp4">
                         Tu navegador no soporta la reproducción de video.
                     </video>
                 </div>
@@ -295,17 +327,13 @@
         <div id="s2" class="tab" role="tabpanel" aria-labelledby="btn-s2">
             <div class="card">
                 <div class="icon">💻</div>
-                <h2>2. Componentes Utilizados</h2>
-                <p>El circuito utiliza los siguientes módulos y componentes para la detección e indicación en tiempo real:</p>
+                <h2>2. Fundamentos de la Automatización</h2>
+                <p>Todo sistema de control se divide en tres etapas fundamentales[cite: 1]:</p>
                 <br>
                 <ul>
-                    <li><strong>Arduino Uno R3:</strong> Microcontrolador principal encargado de ejecutar la lógica del sistema.</li>
-                    <li><strong>Sensor Ultrasónico HC-SR04:</strong> Mide la distancia de los visitantes hacia el área delimitada.</li>
-                    <li><strong>LED Rojo (Peligro):</strong> Indicador de invasión de zona de riesgo.</li>
-                    <li><strong>LED Verde (Seguro):</strong> Indicador de zona libre y funcionamiento normal.</li>
-                    <li><strong>Buzzer (Zumbador):</strong> Alarma acústica suplementaria ante intrusiones.</li>
-                    <li><strong>Push Button:</strong> Botón físico para activación y reinicio manual de la alarma.</li>
-                    <li><strong>Protoboard y Resistencias (220 Ω):</strong> Placa de pruebas y protección para los diodos LED.</li>
+                    <li><strong>1. Detectar:</strong> El sensor ultrasónico HC-SR04 mide el tiempo de vuelo del pulso de sonido para determinar la distancia de un visitante (rango de 2 a 400 cm)[cite: 1].</li>
+                    <li><strong>2. Procesar:</strong> El microcontrolador ATmega328 del Arduino Uno R3 compara la medición contra un umbral crítico establecido en 60 cm[cite: 1].</li>
+                    <li><strong>3. Alertar:</strong> Se activan los actuadores de señalización (LED rojo y buzzer piezoeléctrico) en forma coordinada ante una intrusión[cite: 1].</li>
                 </ul>
             </div>
         </div>
@@ -313,8 +341,80 @@
         <div id="s3" class="tab" role="tabpanel" aria-labelledby="btn-s3">
             <div class="card">
                 <div class="icon">⚡</div>
-                <h2>3. Código Fuente C++</h2>
-                <p>A continuación se muestra el bloque principal de configuración de pines e inicialización del programa desarrollado en Tinkercad:</p>
+                <h2>3. Anexo Técnico de Componentes</h2>
+                <p>Tabla resumida con las especificaciones de hardware según el informe técnico[cite: 1]:</p>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Componente</th>
+                                <th>Función en el sistema</th>
+                                <th>Especificación técnica</th>
+                                <th>Cant.</th>
+                                <th>Etapa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Arduino Uno R3</strong></td>
+                                <td>Unidad de control y procesamiento[cite: 1]</td>
+                                <td>ATmega328, 14 pines digitales, 6 analógicos[cite: 1]</td>
+                                <td>1</td>
+                                <td>Procesar[cite: 1]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sensor HC-SR04</strong></td>
+                                <td>Medición de distancia al obstáculo[cite: 1]</td>
+                                <td>Rango 2-400 cm, tiempo de vuelo[cite: 1]</td>
+                                <td>1</td>
+                                <td>Detectar[cite: 1]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>LED verde</strong></td>
+                                <td>Indicador visual de condición segura[cite: 1]</td>
+                                <td>Diodo emisor de luz (baja corriente)[cite: 1]</td>
+                                <td>1</td>
+                                <td>Alertar[cite: 1]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>LED rojo</strong></td>
+                                <td>Indicador visual de condición de alerta[cite: 1]</td>
+                                <td>Diodo emisor de luz (baja corriente)[cite: 1]</td>
+                                <td>1</td>
+                                <td>Alertar[cite: 1]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Buzzer</strong></td>
+                                <td>Indicador sonoro de alerta[cite: 1]</td>
+                                <td>Zumbador piezoeléctrico de baja tensión[cite: 1]</td>
+                                <td>1</td>
+                                <td>Alertar[cite: 1]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Resistencias</strong></td>
+                                <td>Protección eléctrica para los LED[cite: 1]</td>
+                                <td>Valor limitador para LED estándar[cite: 1]</td>
+                                <td>2</td>
+                                <td>Alertar[cite: 1]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Protoboard / Pulsador</strong></td>
+                                <td>Conexión del circuito y control manual[cite: 1]</td>
+                                <td>Placa sin soldadura y botón momentáneo[cite: 1]</td>
+                                <td>1 / 1</td>
+                                <td>Estructura / Control[cite: 1]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="s4" class="tab" role="tabpanel" aria-labelledby="btn-s4">
+            <div class="card">
+                <div class="icon">🔧</div>
+                <h2>4. Programa C++ y Lógica Tinkercad</h2>
+                <p>Implementación en C/C++ probada de forma virtual dentro del entorno Tinkercad Circuits[cite: 1]:</p>
                 <pre>
 #define LedVerde 8
 #define LedRojo 12
@@ -338,63 +438,56 @@ void setup() {
     noTone(Buzzer);
 
     Serial.begin(9600);
-    Serial.println("IRTRA GUARD");
+    Serial.println("IRTRA GUARD Inicializado");
 }
                 </pre>
-            </div>
-        </div>
-
-        <div id="s4" class="tab" role="tabpanel" aria-labelledby="btn-s4">
-            <div class="card">
-                <div class="icon">🔧</div>
-                <h2>4. Lógica de Funcionamiento</h2>
-                <p>El sistema monitorea constantemente la distancia calculada por el sensor ultrasónico HC-SR04:</p>
-                <br>
-                <ul>
-                    <li><strong>Zona Segura (&gt; 60 cm):</strong> Mantiene encendido el <strong>LED Verde</strong> y apaga los indicadores de alerta.</li>
-                    <li><strong>Zona Peligrosa (&le; 60 cm):</strong> Detecta la cercanía de la persona, enciende inmediatamente el <strong>LED Rojo</strong> y activa la alarma sonora continua a través del <strong>Buzzer</strong>.</li>
-                    <li><strong>Reinicio Manual:</strong> Permite restablecer el estado del sistema mediante un botón físico (*Push Button*).</li>
-                </ul>
             </div>
         </div>
 
         <div id="s5" class="tab" role="tabpanel" aria-labelledby="btn-s5">
             <div class="card">
                 <div class="icon">🚀</div>
-                <h2>5. Impacto en los ODS</h2>
-                <p><strong>ODS 3: Salud y Bienestar</strong></p>
+                <h2>5. Seguridad, Normativa y ODS 3</h2>
+                <p><strong>Normativa y Prevención:</strong> Basado en los estándares internacionales de seguridad en atracciones (como la UNE-EN 13814:2020)[cite: 1], IRTRA GUARD previene las <i>acciones inseguras</i> causadas por despistes de los visitantes[cite: 1].</p>
                 <br>
-                <p>El proyecto impacta de manera directa en la reducción de incidentes dentro de áreas de alto riesgo operacionales en parques de atracciones, contribuyendo a la protección física y el bienestar de las familias y colaboradores.</p>
+                <p><strong>Sostenibilidad (ODS 3):</strong> El proyecto contribuye al Objetivo de Desarrollo Sostenible 3 de la ONU (Salud y Bienestar), promoviendo entornos recreativos más seguros[cite: 1].</p>
             </div>
         </div>
 
         <div id="s6" class="tab" role="tabpanel" aria-labelledby="btn-s6">
             <div class="card">
                 <div class="icon">📡</div>
-                <h2>6. Estado y Recursos</h2>
-                <p><strong>Estado del Sistema:</strong> ¡FUNCIONA! Circuito simulado y probado exitosamente dentro del entorno virtual Tinkercad Circuits.</p>
+                <h2>6. Conclusiones del Informe</h2>
+                <p>• La tecnología de bajo costo demuestra que no hace falta una arquitectura compleja para resolver problemas reales de seguridad operativa en espacios públicos[cite: 1].</p>
                 <br>
-                <p><strong>Archivos del Proyecto:</strong> Puedes consultar toda la investigación, esquemas de conexión y código en la carpeta del repositorio: <code>IRTRA-GUARD/Proyecto</code>.</p>
-                <br>
-                <p><strong>Conclusión:</strong> Demuestra que la automatización de bajo costo implementada con microcontroladores incrementa la seguridad operativa en áreas de recreación masiva.</p>
+                <p>• IRTRA GUARD no busca sustituir la supervisión humana o la señalización existente, sino funcionar como un elemento complementario que actúa de forma constante e inmediata[cite: 1].</p>
             </div>
         </div>
 
         <div id="s7" class="tab" role="tabpanel" aria-labelledby="btn-s7">
             <div class="card">
                 <div class="icon">🤖</div>
-                <h2>7. Integrantes del Equipo</h2>
+                <h2>7. Equipo y Referencias</h2>
+                <p><strong>Integrantes (Colegio Capouilliez - Septiembre 2026):</strong>[cite: 1]</p>
                 <ul>
-                    <li><strong>Dana Gordillo:</strong> Diseño del circuito, programación C++ y pruebas del sistema.</li>
-                    <li><strong>Gabriel Castillo:</strong> Investigación, lógica de control y documentación técnica.</li>
-                    <li><strong>Augusto Mérida:</strong> Diseño de infografía, montaje en Tinkercad y presentación.</li>
+                    <li><strong>Dana Gordillo:</strong> Circuito, programación y pruebas[cite: 1].</li>
+                    <li><strong>Gabriel Castillo:</strong> Investigación, lógica y documentación técnica[cite: 1].</li>
+                    <li><strong>Augusto Mérida:</strong> Diseño, simulación y presentación[cite: 1].</li>
+                </ul>
+                <br>
+                <p><strong>Referencias Bibliográficas (Estilo APA):</strong>[cite: 1]</p>
+                <ul>
+                    <li>ACHS. (s.f.). <i>Prevención de riesgos en parques de diversión</i>[cite: 1].</li>
+                    <li>Innovación Digital 360. (2023). <i>Automatización industrial: qué es y ventajas</i>[cite: 1].</li>
+                    <li>MIT Mechanical Engineering. (2019). <i>Arduino UNO microcontroller board</i>[cite: 1].</li>
+                    <li>PNUD. (s.f.). <i>Objetivo de Desarrollo Sostenible 3: Salud y bienestar</i>[cite: 1].</li>
                 </ul>
             </div>
         </div>
     </main>
 
     <footer>
-        <p>Tecnología, Seguridad y Diversión en Armonía | Hecho por <strong>@kenzz</strong></p>
+        <p>IRTRA GUARD &copy; 2026 | Desarrollado por <strong>Dana Gordillo, Gabriel Castillo y Augusto Mérida</strong>[cite: 1]</p>
     </footer>
 
     <script>
@@ -419,621 +512,6 @@ void setup() {
             });
         });
     </script>
-</body>
-
-</html>
-
-/* =========================
-   ENCABEZADO
-========================= */
-
-header{
-
-    text-align:center;
-
-    padding:70px 20px 50px;
-
-    background:rgba(0,0,0,0.25);
-
-    border-bottom:1px solid rgba(255,255,255,0.15);
-
-    backdrop-filter:blur(10px);
-
-}
-
-header h1{
-
-    font-size:clamp(35px,6vw,65px);
-
-    font-weight:900;
-
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-
-    text-shadow:
-        0 0 10px #fff,
-        0 0 25px #7126bb,
-        0 0 45px #7126bb;
-
-    margin-bottom:15px;
-
-}
-
-header p{
-
-    font-size:18px;
-
-    color:#ddd;
-
-}
-
-
-/* =========================
-   CONTENEDOR
-========================= */
-
-main{
-
-    width:90%;
-
-    max-width:1200px;
-
-    margin:40px auto;
-
-}
-
-
-/* =========================
-   PESTAÑAS
-========================= */
-
-.tabs{
-
-    display:flex;
-
-    justify-content:center;
-
-    flex-wrap:wrap;
-
-    gap:12px;
-
-    margin-bottom:30px;
-
-}
-
-button{
-
-    border:none;
-
-    padding:14px 22px;
-
-    border-radius:12px;
-
-    background:rgba(255,255,255,0.08);
-
-    color:white;
-
-    font-size:15px;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-    border:1px solid rgba(255,255,255,0.15);
-
-    backdrop-filter:blur(10px);
-
-    transition:all .3s ease;
-
-}
-
-button:hover{
-
-    transform:translateY(-4px);
-
-    background:#7126bb;
-
-    box-shadow:
-        0 8px 25px rgba(113,38,187,.5);
-
-}
-
-button.active{
-
-    background:linear-gradient(135deg,#7126bb,#a73cff);
-
-    box-shadow:
-        0 0 20px rgba(167,60,255,.6);
-
-}
-
-
-/* =========================
-   PESTAÑAS
-========================= */
-
-.tab{
-
-    display:none;
-
-    animation:aparecer .5s ease;
-
-}
-
-.tab.active{
-
-    display:block;
-
-}
-
-
-@keyframes aparecer{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(20px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
-}
-
-
-/* =========================
-   TARJETA
-========================= */
-
-.card{
-
-    min-height:350px;
-
-    padding:45px;
-
-    border-radius:25px;
-
-    background:rgba(255,255,255,0.08);
-
-    border:1px solid rgba(255,255,255,0.15);
-
-    backdrop-filter:blur(15px);
-
-    box-shadow:
-        0 20px 50px rgba(0,0,0,.35);
-
-    position:relative;
-
-    overflow:hidden;
-
-}
-
-
-.card::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:200px;
-
-    height:200px;
-
-    background:#7126bb;
-
-    filter:blur(100px);
-
-    opacity:.35;
-
-    top:-80px;
-
-    right:-80px;
-
-}
-
-
-.card h2{
-
-    font-size:32px;
-
-    margin-bottom:20px;
-
-    position:relative;
-
-}
-
-
-.card p{
-
-    color:#ddd;
-
-    font-size:17px;
-
-    line-height:1.7;
-
-    position:relative;
-
-}
-
-
-/* =========================
-   ICONO CENTRAL
-========================= */
-
-.icon{
-
-    width:90px;
-
-    height:90px;
-
-    margin:20px auto 30px;
-
-    border-radius:50%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    font-size:40px;
-
-    background:linear-gradient(
-        135deg,
-        #7126bb,
-        #a73cff
-    );
-
-    box-shadow:
-        0 0 30px rgba(167,60,255,.6);
-
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-
-    margin-top:80px;
-
-    padding:25px;
-
-    text-align:center;
-
-    background:rgba(0,0,0,.35);
-
-    border-top:1px solid rgba(255,255,255,.1);
-
-    color:#ccc;
-
-}
-
-footer strong{
-
-    color:#a73cff;
-
-}
-
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:768px){
-
-    header{
-
-        padding:50px 15px 40px;
-
-    }
-
-    main{
-
-        width:94%;
-
-        margin:25px auto;
-
-    }
-
-    .tabs{
-
-        display:grid;
-
-        grid-template-columns:1fr 1fr;
-
-    }
-
-    button{
-
-        width:100%;
-
-        padding:13px 8px;
-
-    }
-
-    .card{
-
-        padding:30px 20px;
-
-        min-height:300px;
-
-    }
-
-    .card h2{
-
-        font-size:25px;
-
-    }
-
-}
-
-@media(max-width:450px){
-
-    .tabs{
-
-        grid-template-columns:1fr;
-
-    }
-
-}
-
-
-/* =========================
-   BARRA DE DESPLAZAMIENTO
-========================= */
-
-::-webkit-scrollbar{
-
-    width:8px;
-
-}
-
-::-webkit-scrollbar-track{
-
-    background:#09001f;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-    background:#7126bb;
-
-    border-radius:10px;
-
-}
-
-</style>
-
-</head>
-
-
-<body>
-
-
-<header>
-
-<h1>Mi Bitácora</h1>
-
-<p>Mi espacio para presentar mis proyectos y trabajos</p>
-
-</header>
-
-
-<main>
-
-
-<!-- =========================
-     BOTONES
-========================= -->
-
-<div class="tabs">
-
-<button class="active" onclick="openTab('s1',this)">
-📘 Pestaña 1
-</button>
-
-<button onclick="openTab('s2',this)">
-💻 Pestaña 2
-</button>
-
-<button onclick="openTab('s3',this)">
-⚡ Pestaña 3
-</button>
-
-<button onclick="openTab('s4',this)">
-🔧 Pestaña 4
-</button>
-
-<button onclick="openTab('s5',this)">
-🚀 Pestaña 5
-</button>
-
-<button onclick="openTab('s6',this)">
-📡 Pestaña 6
-</button>
-
-<button onclick="openTab('s7',this)">
-🤖 Pestaña 7
-</button>
-
-</div>
-
-
-<!-- =========================
-     CONTENIDO
-========================= -->
-
-<div id="s1" class="tab active">
-
-<div class="card">
-
-<div class="icon">📘</div>
-
-<h2>Pestaña 1</h2>
-
-<p>
-Aquí puedes colocar el contenido de tu primera sección.
-</p>
-
-</div>
-
-</div>
-
-
-<div id="s2" class="tab">
-
-<div class="card">
-
-<div class="icon">💻</div>
-
-<h2>Pestaña 2</h2>
-
-<p>
-Aquí puedes colocar el contenido de tu segunda sección.
-</p>
-
-</div>
-
-</div>
-
-
-<div id="s3" class="tab">
-
-<div class="card">
-
-<div class="icon">⚡</div>
-
-<h2>Pestaña 3</h2>
-
-<p>
-Aquí puedes colocar el contenido de tu tercera sección.
-</p>
-
-</div>
-
-</div>
-
-
-<div id="s4" class="tab">
-
-<div class="card">
-
-<div class="icon">🔧</div>
-
-<h2>Pestaña 4</h2>
-
-<p>
-Aquí puedes colocar el contenido de tu cuarta sección.
-</p>
-
-</div>
-
-</div>
-
-
-<div id="s5" class="tab">
-
-<div class="card">
-
-<div class="icon">🚀</div>
-
-<h2>Pestaña 5</h2>
-
-<p>
-Aquí puedes colocar el contenido de tu quinta sección.
-</p>
-
-</div>
-
-</div>
-
-
-<div id="s6" class="tab">
-
-<div class="card">
-
-<div class="icon">📡</div>
-
-<h2>Pestaña 6</h2>
-
-<p>
-Aquí puedes colocar el contenido de tu sexta sección.
-</p>
-
-</div>
-
-</div>
-
-
-<div id="s7" class="tab">
-
-<div class="card">
-
-<div class="icon">🤖</div>
-
-<h2>Pestaña 7</h2>
-
-<p>
-Aquí puedes colocar el contenido de tu séptima sección.
-</p>
-
-</div>
-
-</div>
-
-
-</main>
-
-
-<footer>
-
-<p>
-Hecho por <strong>@kenzz</strong>
-</p>
-
-</footer>
-
-
-<script>
-
-function openTab(id,btn){
-
-    document
-    .querySelectorAll('.tab')
-    .forEach(tab => {
-        tab.classList.remove('active');
-    });
-
-
-    document
-    .querySelectorAll('button')
-    .forEach(button => {
-        button.classList.remove('active');
-    });
-
-
-    document
-    .getElementById(id)
-    .classList.add('active');
-
-
-    btn.classList.add('active');
-
-}
-
-</script>
-
-
 </body>
 
 </html>
