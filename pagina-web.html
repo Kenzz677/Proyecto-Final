@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRTRA GUARD - Bitácora del Proyecto</title>
+
+    <style>
+        /* =========================
+           CONFIGURACIÓN GENERAL
+        ========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top left, #7126bb 0%, transparent 35%),
+                radial-gradient(circle at bottom right, #100662 0%, transparent 40%),
+                linear-gradient(135deg, #09001f, #16004a, #25006b);
+            color: white;
+        }
+
+        /* =========================
+           ENCABEZADO
+        ========================= */
+        header {
+            text-align: center;
+            padding: 50px 20px 30px;
+            background: rgba(0, 0, 0, 0.25);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        header h1 {
+            font-size: clamp(32px, 5vw, 55px);
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow:
+                0 0 10px #fff,
+                0 0 25px #7126bb,
+                0 0 45px #7126bb;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 18px;
+            color: #ddd;
+        }
+
+        /* =========================
+           CONTENEDOR Y PESTAÑAS
+        ========================= */
+        main {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .tab-btn {
+            border: none;
+            padding: 12px 18px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            transition: all .3s ease;
+        }
+
+        .tab-btn:hover {
+            transform: translateY(-3px);
+            background: #7126bb;
+            box-shadow: 0 8px 25px rgba(113, 38, 187, .5);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #7126bb, #a73cff);
+            box-shadow: 0 0 20px rgba(167, 60, 255, .6);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* =========================
+           CONTENIDO Y TARJETAS
+        ========================= */
+        .tab {
+            display: none;
+            animation: aparecer .5s ease;
+        }
+
+        .tab.active {
+            display: block;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            min-height: 350px;
+            padding: 40px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, .35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: #7126bb;
+            filter: blur(100px);
+            opacity: .35;
+            top: -80px;
+            right: -80px;
+        }
+
+        .card h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            position: relative;
+            color: #fff;
+        }
+
+        .card p, .card ul {
+            color: #ddd;
+            font-size: 16px;
+            line-height: 1.7;
+            position: relative;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .card li::before {
+            content: "•";
+            color: #a73cff;
+            font-weight: bold;
+            font-size: 20px;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .icon {
+            width: 80px;
+            height: 80px;
+            margin: 10px auto 25px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            background: linear-gradient(135deg, #7126bb, #a73cff);
+            box-shadow: 0 0 30px rgba(167, 60, 255, .6);
+        }
+
+        /* Tabla estilizada Glassmorphism */
+        .table-responsive {
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 12px;
+            overflow: hidden;
+            font-size: 14px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th {
+            background: rgba(113, 38, 187, 0.5);
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Reproductor de Audio Estilizado */
+        .audio-container {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.35);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .audio-container h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: #a73cff;
+        }
+
+        audio {
+            width: 100%;
+            outline: none;
+            border-radius: 30px;
+        }
+
+        pre {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            color: #8be9fd;
+            margin-top: 15px;
+        }
+
+        /* =========================
+           FOOTER Y RESPONSIVE
+        ========================= */
+        footer {
+            margin-top: 60px;
+            padding: 25px;
+            text-align: center;
+            background: rgba(0, 0, 0, .35);
+            border-top: 1px solid rgba(255, 255, 255, .1);
+            color: #ccc;
+        }
+
+        footer strong {
+            color: #a73cff;
+        }
+
+        @media(max-width: 768px) {
+            header { padding: 40px 15px 30px; }
+            main { width: 94%; margin: 20px auto; }
+            .tabs { display: grid; grid-template-columns: 1fr 1fr; }
+            .card { padding: 25px 20px; }
+            .card h2 { font-size: 22px; }
+        }
+
+        @media(max-width: 450px) {
+            .tabs { grid-template-columns: 1fr; }
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #09001f; }
+        ::-webkit-scrollbar-thumb { background: #7126bb; border-radius: 10px; }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>IRTRA GUARD</h1>
+        <p>Sistema Inteligente de Seguridad y Alerta | Colegio Capouilliez</p>
+    </header>
+
+    <main>
+        <!-- NAVEGACIÓN DE PESTAÑAS -->
+        <div class="tabs" role="tablist">
+            <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="s1" id="btn-s1">🎙️ Podcast & Introducción</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s2" id="btn-s2">💻 Fundamentos</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s3" id="btn-s3">⚡ Componentes</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s4" id="btn-s4">🔧 Código C++</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s5" id="btn-s5">🚀 Marco Teórico & ODS</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s6" id="btn-s6">📡 Conclusiones</button>
+            <button class="tab-btn" role="tab" aria-selected="false" aria-controls="s7" id="btn-s7">🤖 Equipo & Citas</button>
+        </div>
+
+        <!-- CONTENIDO DE PESTAÑAS -->
+        <div id="s1" class="tab active" role="tabpanel" aria-labelledby="btn-s1">
+            <div class="card">
+                <div class="icon">🎙️</div>
+                <h2>1. Podcast e Introducción al Proyecto</h2>
+                <p><strong>El Contexto:</strong> En un parque de atracciones como IRTRA Petapa, con alta afluencia constante de familias y niños, un descuido de segundos puede derivar en accidentes en zonas restringidas[cite: 1].</p>
+                <br>
+                <p><strong>Propuesta IRTRA GUARD:</strong> Sistema autónomo diseñado con Arduino para medir la distancia de proximidad y emitir alertas inmediatas (sonoras y visuales) antes de que ocurra una eventualidad[cite: 1].</p>
+                <br>
+                <div class="audio-container">
+                    <h3>Escucha nuestro Podcast de Presentación</h3>
+                    <audio controls>
+                        <source src="Podcast IRTRA GUARD.mp3" type="audio/mpeg">
+                        <source src="Podcast IRTRA GUARD.wav" type="audio/wav">
+                        Tu navegador no soporta el elemento de audio.
+                    </audio>
+                </div>
+            </div>
+        </div>
+
+        <div id="s2" class="tab" role="tabpanel" aria-labelledby="btn-s2">
+            <div class="card">
+                <div class="icon">💻</div>
+                <h2>2. Fundamentos de la Automatización</h2>
+                <p>Todo sistema de control se divide en tres etapas fundamentales[cite: 1]:</p>
+                <br>
+                <ul>
+                    <li><strong>1. Detectar:</strong> El sensor ultrasónico HC-SR04 mide el tiempo de vuelo del pulso de sonido para determinar la distancia de un visitante (rango de 2 a 400 cm)[cite: 1].</li>
+                    <li><strong>2. Procesar:</strong> El microcontrolador ATmega328 del Arduino Uno R3 compara la medición contra un umbral crítico establecido en 60 cm[cite: 1].</li>
+                    <li><strong>3. Alertar:</strong> Se activan los actuadores de señalización (LED rojo y buzzer piezoeléctrico) en forma coordinada ante una intrusión[cite: 1].</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="s3" class="tab" role="tabpanel" aria-labelledby="btn-s3">
+            <div class="card">
+                <div class="icon">⚡</div>
+                <h2>3. Anexo Técnico de Componentes</h2>
+                <p>Tabla resumida con las especificaciones de hardware según el informe técnico[cite: 1]:</p>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Componente</th>
+                                <th>Función en el sistema</th>
+                                <th>Especificación técnica</th>
+                                <th>Cant.</th>
+                                <th>Etapa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Arduino Uno R3</strong></td>
+                                <td>Unidad de control y procesamiento[cite: 1]</td>
+                                <td>ATmega328, 14 pines digitales, 6 analógicos[cite: 1]</td>
+                                <td>1</td>
+                                <td>Procesar[cite: 1]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sensor HC-SR04</strong></td>
+                                <td>Medición de distancia al obstáculo[cite: 1]</td>
+                                <td>Rango 2-400 cm, tiempo de vuelo[cite: 1]</td>
+                                <td>1</td>
+                                <td>Detectar[cite: 1]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>LED verde</strong></td>
+                                <td>Indicador visual de condición segura[cite: 1]</td>
+                                <td>Diodo emisor de luz (baja corriente)[cite: 1]</td>
+                                <td>1</td>
+                                <td>Alertar[cite: 1]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>LED rojo</strong></td>
+                                <td>Indicador visual de condición de alerta[cite: 1]</td>
+                                <td>Diodo emisor de luz (baja corriente)[cite: 1]</td>
+                                <td>1</td>
+                                <td>Alertar[cite: 1]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Buzzer</strong></td>
+                                <td>Indicador sonoro de alerta[cite: 1]</td>
+                                <td>Zumbador piezoeléctrico de baja tensión[cite: 1]</td>
+                                <td>1</td>
+                                <td>Alertar[cite: 1]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Resistencias</strong></td>
+                                <td>Protección eléctrica para los LED[cite: 1]</td>
+                                <td>Valor limitador para LED estándar[cite: 1]</td>
+                                <td>2</td>
+                                <td>Alertar[cite: 1]</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Protoboard / Pulsador</strong></td>
+                                <td>Conexión del circuito y control manual[cite: 1]</td>
+                                <td>Placa sin soldadura y botón momentáneo[cite: 1]</td>
+                                <td>1 / 1</td>
+                                <td>Estructura / Control[cite: 1]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="s4" class="tab" role="tabpanel" aria-labelledby="btn-s4">
+            <div class="card">
+                <div class="icon">🔧</div>
+                <h2>4. Programa C++ y Lógica Tinkercad</h2>
+                <p>Implementación en C/C++ probada de forma virtual dentro del entorno Tinkercad Circuits[cite: 1]:</p>
+                <pre>
+#define LedVerde 8
+#define LedRojo 12
+#define FotoRe A0
+#define Button A1
+#define Buzzer 7
+
+int CantidadLuz = 400;
+bool alarmaActivada = false;
+int estadoAnteriorBoton = HIGH;
+
+void setup() {
+    pinMode(LedVerde, OUTPUT);
+    pinMode(LedRojo, OUTPUT);
+    pinMode(FotoRe, INPUT);
+    pinMode(Button, INPUT_PULLUP);
+    pinMode(Buzzer, OUTPUT);
+
+    digitalWrite(LedVerde, HIGH);
+    digitalWrite(LedRojo, LOW);
+    noTone(Buzzer);
+
+    Serial.begin(9600);
+    Serial.println("IRTRA GUARD Inicializado");
+}
+                </pre>
+            </div>
+        </div>
+
+        <div id="s5" class="tab" role="tabpanel" aria-labelledby="btn-s5">
+            <div class="card">
+                <div class="icon">🚀</div>
+                <h2>5. Seguridad, Normativa y ODS 3</h2>
+                <p><strong>Normativa y Prevención:</strong> Basado en los estándares internacionales de seguridad en atracciones (como la UNE-EN 13814:2020)[cite: 1], IRTRA GUARD previene las <i>acciones inseguras</i> causadas por despistes de los visitantes[cite: 1].</p>
+                <br>
+                <p><strong>Sostenibilidad (ODS 3):</strong> El proyecto contribuye al Objetivo de Desarrollo Sostenible 3 de la ONU (Salud y Bienestar), promoviendo entornos recreativos más seguros[cite: 1].</p>
+            </div>
+        </div>
+
+        <div id="s6" class="tab" role="tabpanel" aria-labelledby="btn-s6">
+            <div class="card">
+                <div class="icon">📡</div>
+                <h2>6. Conclusiones del Informe</h2>
+                <p>• La tecnología de bajo costo demuestra que no hace falta una arquitectura compleja para resolver problemas reales de seguridad operativa en espacios públicos[cite: 1].</p>
+                <br>
+                <p>• IRTRA GUARD no busca sustituir la supervisión humana o la señalización existente, sino funcionar como un elemento complementario que actúa de forma constante e inmediata[cite: 1].</p>
+            </div>
+        </div>
+
+        <div id="s7" class="tab" role="tabpanel" aria-labelledby="btn-s7">
+            <div class="card">
+                <div class="icon">🤖</div>
+                <h2>7. Equipo y Referencias</h2>
+                <p><strong>Integrantes (Colegio Capouilliez - Septiembre 2026):</strong>[cite: 1]</p>
+                <ul>
+                    <li><strong>Dana Gordillo:</strong> Circuito, programación y pruebas[cite: 1].</li>
+                    <li><strong>Gabriel Castillo:</strong> Investigación, lógica y documentación técnica[cite: 1].</li>
+                    <li><strong>Augusto Mérida:</strong> Diseño, simulación y presentación[cite: 1].</li>
+                </ul>
+                <br>
+                <p><strong>Referencias Bibliográficas (Estilo APA):</strong>[cite: 1]</p>
+                <ul>
+                    <li>ACHS. (s.f.). <i>Prevención de riesgos en parques de diversión</i>[cite: 1].</li>
+                    <li>Innovación Digital 360. (2023). <i>Automatización industrial: qué es y ventajas</i>[cite: 1].</li>
+                    <li>MIT Mechanical Engineering. (2019). <i>Arduino UNO microcontroller board</i>[cite: 1].</li>
+                    <li>PNUD. (s.f.). <i>Objetivo de Desarrollo Sostenible 3: Salud y bienestar</i>[cite: 1].</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>IRTRA GUARD &copy; 2026 | Desarrollado por <strong>Dana Gordillo, Gabriel Castillo y Augusto Mérida</strong>[cite: 1]</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('.tab-btn');
+            const tabs = document.querySelectorAll('.tab');
+
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.getAttribute('aria-controls');
+
+                    tabs.forEach(tab => tab.classList.remove('active'));
+                    buttons.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-selected', 'false');
+                    });
+
+                    document.getElementById(targetId).classList.add('active');
+                    button.classList.add('active');
+                    button.setAttribute('aria-selected', 'true');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
